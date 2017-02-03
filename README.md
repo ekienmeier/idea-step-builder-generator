@@ -36,4 +36,5 @@ Person p = Person.newInstance()
 
 ### Additional resources about the Builder pattern and the Step Builder:
 [Crisp's Blog - Another builder pattern for Java](http://blog.crisp.se/2013/10/09/perlundholm/another-builder-pattern-for-java)
+
 [Remove duplications and fix bad names: Step Builder pattern](http://rdafbn.blogspot.ie/2012/07/step-builder-pattern_28.html)
