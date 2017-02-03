@@ -1,0 +1,101 @@
+<idea-plugin version="2">
+    <id>at.kienmeier.plugins.creational.stepbuilder</id>
+    <name>Step Builder Generator</name>
+    <version>1.0.0</version>
+    <vendor email="ekienmeier@gmail.com">Emanuel Kienmeier</vendor>
+
+    <description><![CDATA[
+        <p>
+            <b>What is it?</b><br/>
+            Based on the Builder creational design pattern, this plugin generates an internal Step Builder
+            for a class. A Step Builder guides the users of your class through the creation process without
+            creating objects with inconsistent internal state.<br/>
+        </p>
+        <br/>
+        <p>
+            <b>Where do I find the plugin when it is installed?</b><br/>
+            You can find an additional action in the "Generate..." menu.<br/>
+        </p>
+        <br/>
+        <p>
+            <b>How do I start?</b><br/>
+            Implement the easiest version of your class, e.g.:<br/>
+            <code>
+            public class Person {<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;protected final String firstName;<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;protected final String lastName;<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;protected int age;<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;protected boolean active;<br/>
+            }<br/>
+            </code>
+            <br/>
+            Even though this class will not compile as is (final fields need to be initialized at once or in constructors),
+            it is a good starting point for the Step Builder. The plugin uses all final fields as mandatory fields, creating
+            explicit Step interfaces for them. All non-final fields are considered optional. A private constructor having
+            parameters for all final fields is created (all other constructors will be removed), as well as getters for all fields.
+            The starting point, a static method called "newInstance", is added to the class.<br/>
+        </p>
+        <br/>
+        <p>
+            <b>What's the benefit for the users of my class?</b><br/>
+            Users of your class will leverage the Step Builder whenever they need to create new instances. Example:<br/>
+            <code>
+            Person p = Person.newInstance()<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.firstName("John")<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.lastName("Doe")<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.age(27)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.active(true)<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+            </code>
+            <br/>
+        </p>
+        <br/>
+        <p>
+            <b>Additional resources about the Builder pattern and the Step Builder:</b><br/>
+            <a href="http://blog.crisp.se/2013/10/09/perlundholm/another-builder-pattern-for-java">Crisp's Blog - Another builder pattern for Java</a><br/>
+            <a href="http://rdafbn.blogspot.ie/2012/07/step-builder-pattern_28.html">Remove duplications and fix bad names: Step Builder pattern</a><br/>
+        </p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <p>
+            <b>Version 1.0.0</b><br/>
+            <ul>
+                <li>Initial version.</li>
+            </ul>
+        </p>
+    ]]>
+    </change-notes>
+
+    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="131"/>
+
+    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <application-components>
+        <!-- Add your application components here -->
+    </application-components>
+
+    <project-components>
+        <!-- Add your project components here -->
+    </project-components>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="at.kienmeier.plugins.creational.stepbuilder.StepBuilderAction"
+                class="at.kienmeier.plugins.creational.stepbuilder.StepBuilderAction"
+                text="Step Builder" description="Generate a private Step Builder and internal interfaces">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt S" second-keystroke="ctrl alt B"/>
+        </action>
+    </actions>
+
+</idea-plugin>
